@@ -7,7 +7,7 @@
     "start": "node app"
   },
   "author": "sunday malgwi",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "b": "^2.0.1",
     "bcryptjs": "^2.4.3",

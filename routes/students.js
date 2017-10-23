@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // bring in article model
-let Article = require('../models/article');
+let Student = require('../models/student');
 // user model
 let User = require('../models/user');
 
@@ -24,16 +24,16 @@ router.post('/add', function(req,res){
 
   if(errors){
     res.render('add_article', {
-      title: 'Add article',
+      title: 'Add Article',
       errors:errors
     });
   } else {
-    let article = new Article();
-    article.title = req.body.title;
-    article.author = req.user._id;
-    article.body = req.body.body;
+    let student = new Student();
+    student.title = req.body.title;
+    student.author = req.user._id;
+    student.body = req.body.body;
 
-    article.save(function(err){
+    student.save(function(err){
       if(err){
         console.log(err);
         return;
@@ -47,28 +47,28 @@ router.post('/add', function(req,res){
 
 //load edit form
 router.get('/edit/:id', ensureAuthenticated, function(req, res){
-  Article.findById(req.params.id, function(err, article){
-    if(article.author != req.user._id){
+  Student.findById(req.params.id, function(err, student){
+    if(student.author != req.user._id){
       req.flash('danger', 'Not Authorized');
       res.redirect('/');
     }
     res.render('edit_article', {
       title: 'Edit Article',
-      article:article
+      student:student
     });
   });
 });
 
 // update submit POST route
 router.post('/edit/:id', function(req,res){
-  let article = {};
-  article.title = req.body.title;
-  article.author = req.body.author;
-  article.body = req.body.body;
+  let student = {};
+  student.title = req.body.title;
+  student.author = req.body.author;
+  student.body = req.body.body;
 
   let query = {_id:req.params.id}
 
-  Article.update(query, article, function(err){
+  Student.update(query, student, function(err){
     if(err){
       console.log(err);
       return;
@@ -87,11 +87,11 @@ router.delete('/:id', function(req, res){
 
   let query = {_id:req.params.id}
 
-  Article.findById(req.params.id, function(){
-    if(article.author != req.user._id){
+  Student.findById(req.params.id, function(){
+    if(student.author != req.user._id){
       res.status(500).send();
     } else {
-      Article.remove(query, function(err){
+      Student.remove(query, function(err){
         if(err){
           console.log(err);
         }
@@ -103,10 +103,10 @@ router.delete('/:id', function(req, res){
 
 //get single articles
 router.get('/:id', function(req, res){
-  Article.findById(req.params.id, function(err, article){
-    User.findById(article.author, function(err, user){
+  Student.findById(req.params.id, function(err, student){
+    User.findById(student.author, function(err, user){
       res.render('article', {
-        article: article,
+        student: student,
         author: user.name
       });
     });

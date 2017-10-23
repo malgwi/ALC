@@ -25,7 +25,7 @@ db.on('error', function(err){
 const app = express();
 
 // bring in models
-let Article = require('./models/article');
+let Student = require('./models/student');
 
 //load view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -85,22 +85,22 @@ app.get('*', function(req, res, next){
 
 // home route
 app.get('/', function(req, res){
-  Article.find({}, function(err, articles){
+  Student.find({}, function(err, students){
     if(err){
       console.log(err);
     } else {
       res.render('index', {
         title:'Students Articles',
-        articles: articles
+        students: students
       });
     }
   });
 });
 
 //route files
-let articles = require('./routes/articles');
+let students = require('./routes/students');
 let users = require('./routes/users');
-app.use('/articles', articles);
+app.use('/students', students);
 app.use('/users', users);
 
 // Start Server

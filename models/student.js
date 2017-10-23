@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
 
 // Resource schema
-let articleSchema = mongoose.Schema({
+let studentSchema = mongoose.Schema({
   title:{
     type: String,
     required: true
@@ -16,4 +16,4 @@ let articleSchema = mongoose.Schema({
   }
 });
 
-let Article = module.exports = mongoose.model('Article', articleSchema);
+let Student = module.exports = mongoose.model('Student', studentSchema);
