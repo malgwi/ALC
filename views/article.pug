@@ -6,6 +6,6 @@ block content
   p= student.body
   hr
   if user
-    if user.id == student.author
+    if user.id ==student.author
       a.btn.btn-default(href='/students/edit/'+student._id) Edit
-      a.btn.btn-danger.delete-article(href='#', data-id=student._id) Delete
+      a.btn.btn-danger.delete-student(href='#',data-id=student._id) Delete
